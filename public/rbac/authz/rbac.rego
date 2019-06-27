@@ -14,14 +14,18 @@ package rbac.authz
 # role-permissions assignments
 # role_permissions = data.bundle.role.permission
 # logic that implements RBAC.
+bundle_name = sprintf("bundle_%v", [input.name])
+
 default allow = false
 allow {
     # lookup the list of roles for the user
-    roles := data.bundle.user.role[input.user]
+    # trace(name)
+    trace(bundle_name)
+    roles := data[bundle_name].user.role[input.user]
     # for each role in that list
     r := roles[_]
     # lookup the permissions list for role r
-    permissions := data.bundle.role.permission[r]
+    permissions := data[bundle_name].role.permission[r]
     # for each permission
     p := permissions[_]
     # check if the permission granted to r matches the user's request
