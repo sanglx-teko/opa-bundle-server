@@ -1,15 +1,15 @@
 const express = require("express");
 const path = require("path");
+const morgan = require("morgan");
 
 const app = express();
 
-// Phuong thuc get() phan hoi mot GET Request
+app.use(morgan("combined"));
+
 app.get("/", (_, res) => {
-  console.log("GET Request");
   res.send("Hello GET");
 });
 
-console.log(path.join(__dirname, "public"));
 app.use("/static", express.static(path.join(__dirname, "public")));
 
 const server = app.listen(3000, () => {
