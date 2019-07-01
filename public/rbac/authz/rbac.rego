@@ -20,7 +20,6 @@ default allow = false
 allow {
     # lookup the list of roles for the user
     # trace(name)
-    trace(bundle_name)
     roles := data[bundle_name].user.role[input.user]
     # for each role in that list
     r := roles[_]
